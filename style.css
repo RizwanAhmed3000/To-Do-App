@@ -1,0 +1,116 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: linear-gradient(to top, #00b4db, #0083b0);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Courgette', cursive;
+}
+
+.mainContainer{
+    margin-top: 80px;
+    padding: 20px;
+    width: 70%;
+    /* height: 200px; */
+    border-radius: 15px;
+    background: linear-gradient(145deg, #00a2c5, #00c1ea);
+    box-shadow:  20px 20px 50px #007e99, -20px -20px 50px #00eaff;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.heading{
+    font-size: 1.8rem;
+    color: white;
+    position: relative;
+}
+.heading::before, .heading::after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 210%;
+    height: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+.heading::before{
+    top: -5%;
+}
+
+.alertBox{
+    padding: 5px;
+    margin-top: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    letter-spacing: 1.5px;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: 900;
+}
+.red{
+    background-color: rgb(255, 147, 147);
+    color: red;
+}
+.green{
+    background-color: rgb(93, 228, 93);
+    color: rgb(3, 99, 3);
+}
+
+.inputArea{
+    margin-top: 15px;
+    border-radius: 5px;
+    padding: 8px;
+    width: 80%;
+    background-color: white;
+    display: flex;
+}
+input{
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: 'Josefin Sans', sans-serif;
+    border: none;
+    outline: none;
+    color: rgb(63, 63, 63);
+}
+button{
+    padding: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #00c1ea;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.listArea{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.listItems{
+    background-color: white;
+    width: 80%;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.fa-pen-to-square{
+    margin-right: 5px;
+}
+
+.listItems ul{
+    list-style: none;
+}
