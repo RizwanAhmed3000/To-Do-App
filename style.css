@@ -64,6 +64,10 @@ body{
     color: rgb(3, 99, 3);
 }
 
+.visibility{
+    visibility: hidden;
+}
+
 .inputArea{
     margin-top: 15px;
     border-radius: 5px;
