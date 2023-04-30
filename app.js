@@ -17,7 +17,7 @@ function addItem() {
         alertBox.textContent = "Item Added"
         alertBox.classList.remove('visibility')
         alertBox.classList.add('green')
-        const string = `<div class="listItems ${increment++}">
+        const string = `<div class="listItems" id="${increment++}">
         <ul>
             <li>${inputValue.value}</li>
         </ul>
@@ -44,7 +44,7 @@ function addItem() {
             const index = itemArray.find((item)=> item === elementText)
             console.log(elementText)
             console.log(itemArray)
-            // console.log(index)
+            console.log(index)
 
         })
     })
