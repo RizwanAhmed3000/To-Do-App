@@ -11,36 +11,63 @@ let itemArray = []
 
 function addItem() {
     if (inputValue.value !== "") {
-        alertBox.textContent = "Item Added"
-        alertBox.classList.remove('visibility')
-        alertBox.classList.add('green')
-        const string = `<div class="listItems">
+
+        const uniqueId = new Date().getTime()
+        // console.log(uniqueId)
+        
+        const string = `<div id="${uniqueId}" class="listItems">
         <ul>
         <li>${inputValue.value}</li>
         </ul>
         <div class="icons">
-        <i class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
-            <i class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
+        <i onclick="editItem('${uniqueId}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
+            <i onclick="deleteItem('${uniqueId}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
             </div>
             </div>
             </div>`
             itemArray.push(string)
+        alertMessage(`${inputValue.value} is added`, "green")
         inputValue.value = ""
     }
     else {
-        alertBox.classList.remove('visibility')
-        alertBox.classList.add('red')
+        alertMessage("Please enter the value", "red")
     }
     listArea.innerHTML = itemArray.join("")
-    const deleteBtns = document.querySelectorAll('.fa-trash')
-    // console.log(deleteBtn)
-    deleteBtns.forEach((deleteBtn, index)=>{
-        deleteBtn.addEventListener('click', ()=>{
-            itemArray.splice(index, 1);
-            deleteBtn.parentElement.parentElement.remove()
-        })
-    })
 }
 
+function alertMessage(message, color){
+    // console.log(alertBox.textContent)
+    alertBox.textContent = message
+    alertBox.classList.remove('visibility')
+    alertBox.classList.add(`${color}`)
+    setTimeout(()=>{
+        alertBox.classList.add('visibility')
+        alertBox.classList.remove(`${color}`)
+    }, 3000)
+}
+
+function deleteItem(uId){
+    const listAreaArray = Array.from(listArea.children)
+    // console.log(listAreaArray)
+    const filteredArray = listAreaArray.filter((item) => {
+        return item.id !== uId
+    })
+    // console.log(filteredArray)
+    itemArray = filteredArray.map((singleItem) =>{
+        
+        return `<div id="${singleItem.id}" class="listItems">
+        <ul>
+        <li>${singleItem.querySelector('li').textContent}</li>
+        </ul>
+        <div class="icons">
+        <i onclick="editItem('${singleItem.id}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
+            <i onclick="deleteItem('${singleItem.id}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
+            </div>
+            </div>
+            </div>`
+    })
+    alertMessage(`Item removed`, 'red')
+    listArea.innerHTML = itemArray.join("")
+}
 
 submitBtn.addEventListener('click', addItem)
