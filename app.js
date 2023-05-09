@@ -70,4 +70,52 @@ function deleteItem(uId){
     listArea.innerHTML = itemArray.join("")
 }
 
+function editItem(uId){
+
+    console.log(`working ==> ${uId}`)
+    const listAreaArray = Array.from(listArea.children)
+    // console.log(listAreaArray)
+    const filteredArray = listAreaArray.filter((item) => {
+        return item.id === uId
+    })
+    
+    const remainingItems = listAreaArray.filter((item) => {
+        return item.id !== uId
+    })
+    itemArray = remainingItems.map((singleItem) =>{
+        
+        return `<div id="${singleItem.id}" class="listItems">
+        <ul>
+        <li>${singleItem.querySelector('li').textContent}</li>
+        </ul>
+        <div class="icons">
+        <i onclick="editItem('${singleItem.id}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
+            <i onclick="deleteItem('${singleItem.id}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
+            </div>
+            </div>
+            </div>`
+    })
+
+    console.log(itemArray)
+    let itemForEdit = prompt("Enter the value")
+    filteredArray[0].children[0].children[0].textContent = itemForEdit
+    console.log(filteredArray)
+    // console.log(filteredArray[0].children[0].children[0].textContent)
+    const toFormate = filteredArray.map((singleItem) =>{
+        
+        return `<div id="${singleItem.id}" class="listItems">
+        <ul>
+        <li>${singleItem.querySelector('li').textContent}</li>
+        </ul>
+        <div class="icons">
+        <i onclick="editItem('${singleItem.id}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
+            <i onclick="deleteItem('${singleItem.id}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
+            </div>
+            </div>
+            </div>`
+    })
+    itemArray.push(toFormate)
+    // console.log(itemArray)
+}
+
 submitBtn.addEventListener('click', addItem)
