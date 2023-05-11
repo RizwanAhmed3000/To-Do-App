@@ -53,68 +53,52 @@ function deleteItem(uId){
     itemArray.splice(indexNumber, 1)
     listArea.innerHTML = itemArray.join("")
     alertMessage(`Item removed`, 'red')
-    // const listAreaArray = Array.from(listArea.children)
-    // // console.log(listAreaArray)
-    // const filteredArray = listAreaArray.filter((item) => {
-    //     return item.id !== uId
-    // })
-    // // console.log(filteredArray)
-    // itemArray = filteredArray.map((singleItem) =>{
-        
-    //     return `<div id="${singleItem.id}" class="listItems">
-    //     <ul>
-    //     <li>${singleItem.querySelector('li').textContent}</li>
-    //     </ul>
-    //     <div class="icons">
-    //     <i onclick="editItem('${singleItem.id}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
-    //         <i onclick="deleteItem('${singleItem.id}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
-    //         </div>
-    //         </div>
-    //         </div>`
-    // })
 }
+
+
 
 function editItem(uId){
 
-    submitBtn.textContent = "Edit"
-    const intoArray = Array.from(listArea.children)
-    console.log(intoArray)
-
-    const filteredArray = intoArray.filter((item)=> item.id === uId)
-    inputValue.value = filteredArray[0].children[0].children[0].textContent
-
-    submitBtn.removeEventListener("click", addItem)
-    submitBtn.addEventListener("click", ()=> editingProcess(uId))
-    // return
-
-}
-
-function editingProcess(uId){
+    const listAreaArray = Array.from(listArea.children)
+    const filteredArray = listAreaArray.filter((item) => {
+        return item.id === uId
+    })
     const indexNumber = itemArray.findIndex((item)=> item.includes(uId))
-    console.log(indexNumber, `==>${uId}`)
-    // console.log(itemArray)
-    itemArray.splice(indexNumber, 1, `<div id="${uId}" class="listItems">
-    <ul>
-    <li>${inputValue.value}</li>
-    </ul>
-    <div class="icons">
-    <i onclick="editItem('${uId}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
-        <i onclick="deleteItem('${uId}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
-        </div>
-        </div>
-        </div>`)
 
-    // console.log(itemArray)
-    listArea.innerHTML = itemArray.join("")
-    inputValue.value = ""
-    submitBtn.textContent = "Submit"
-    alertMessage(`Item edited`, 'green')
-    submitBtn.removeEventListener("click", editingProcess)
-    // submitBtn.addEventListener("click", addItem)
-    // return
+    const remainingItems = listAreaArray.filter((item) => {
+        return item.id !== uId
+    })
+    itemArray = remainingItems.map((singleItem) =>{
 
+        return `<div id="${singleItem.id}" class="listItems">
+        <ul>
+        <li>${singleItem.querySelector('li').textContent}</li>
+        </ul>
+        <div class="icons">
+        <i onclick="editItem('${singleItem.id}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
+            <i onclick="deleteItem('${singleItem.id}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
+            </div>
+            </div>
+            </div>`
+    })
+
+    console.log(itemArray)
+    let itemForEdit = prompt("Enter the value")
+    filteredArray[0].children[0].children[0].textContent = itemForEdit
+    const toFormate = filteredArray.map((singleItem) =>{
+
+        return `<div id="${singleItem.id}" class="listItems">
+        <ul>
+        <li>${singleItem.querySelector('li').textContent}</li>
+        </ul>
+        <div class="icons">
+        <i onclick="editItem('${singleItem.id}')" class="fa-regular fa-pen-to-square" style="color: #5c8ee6; cursor: pointer;"></i>
+            <i onclick="deleteItem('${singleItem.id}')" class="fa-solid fa-trash" style="color: #ff3d3d; cursor: pointer;"></i>
+            </div>
+            </div>
+            </div>`
+    })
+    itemArray.splice(indexNumber, 0, toFormate)
 }
-
-
 
 submitBtn.addEventListener('click', addItem)
