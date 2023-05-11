@@ -11,13 +11,14 @@ body{
     width: 100vw;
     height: 100vh;
     font-family: 'Courgette', cursive;
+    overflow: hidden;
 }
 
 .mainContainer{
-    margin-top: 80px;
+    margin-top: 40px;
     padding: 20px;
     width: 70%;
-    /* height: 200px; */
+    height: 90vh;
     border-radius: 15px;
     background: linear-gradient(145deg, #00a2c5, #00c1ea);
     box-shadow:  20px 20px 50px #007e99, -20px -20px 50px #00eaff;
@@ -99,6 +100,7 @@ button{
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 }
 .listItems{
     background-color: white;
@@ -117,4 +119,20 @@ button{
 
 .listItems ul{
     list-style: none;
+}
+
+@media(min-width: 320px) and (max-width: 500px) {
+    .mainContainer{
+        width: 92%;
+        padding: 10px 5px;
+    }
+    .heading::before, .heading::after{
+        width: 120%;
+    }
+    .inputArea{
+        width: 100%;
+    }
+    .listItems{
+        width: 100%;
+    }
 }
